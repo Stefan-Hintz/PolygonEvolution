@@ -10,8 +10,7 @@ class Document: NSDocument
 {
 	weak var windowController: NSWindowController!
     
-    var world = World(jsonString: " ")
-    
+    var world = World(jsonString: [:])
 
 	override class func autosavesInPlace() -> Bool
 	{

@@ -7,75 +7,75 @@
 //
 
 import Foundation
-import JSONJoy
+import JSONCodable
 
 public typealias Scalar = Float
 
-public struct Vector2: JSONJoy {
+public struct Vector2 {
     public var x: Scalar
     public var y: Scalar
-    
-    public init(_ decoder: JSONDecoder) throws {
-        x = try decoder["x"].getFloat()
-        y = try decoder["x"].getFloat()
+}
+
+extension Vector2: JSONDecodable {
+    public init(object: JSONObject) throws {
+        let decoder = JSONDecoder(object: object)
+            x = try decoder.decode("x")
+            y = try decoder.decode("y")
     }
 }
 
-public struct Edge: JSONJoy {
+
+public struct Edge {
     public var vertices: [Vector2]
-    
-    public init(_ decoder: JSONDecoder) throws {
-        guard let _vertices = decoder["vertices"].array else {
-            throw  JSONError.wrongType
-        }
-        
-        var collect = [Vector2]()
-        for vertDecoder in _vertices {
-            try collect.append(Vector2(vertDecoder))
-        }
-        
-        vertices = collect
+}
+
+extension Edge: JSONDecodable {
+    public init(object: JSONObject) throws {
+        let decoder = JSONDecoder(object: object)
+        vertices = try decoder.decode("vertices")
     }
 }
 
-public struct ShapeType: JSONJoy {
+
+public struct ShapeType {
     public var name: String
     public var id: String
-    
-    public init(_ decoder: JSONDecoder) throws {
-        name = try decoder["name"].getString()
-        id = try decoder["uuid"].getString()
+}
+
+
+extension ShapeType: JSONDecodable {
+    public init(object: JSONObject) throws {
+        let decoder = JSONDecoder(object: object)
+        name = try decoder.decode("name")
+        id = try decoder.decode("id")
     }
 }
 
-public struct Shape: JSONJoy{
+public struct Shape{
     public var edges: [Edge]
     public var center: Vector2
     public var type: ShapeType
-    
-    public init(_ decoder: JSONDecoder) throws {
-        
-        guard let _edges = decoder["edges"].array else {throw JSONError.wrongType}
-        var collect = [Edge]()
-        for edgeDecoder in _edges {
-            try collect.append(Edge(edgeDecoder))
-        }
-        edges = collect
-        center = try Vector2(decoder["center"])
-        type = try ShapeType(decoder["type"])
-    }
 }
 
+
+extension Shape: JSONDecodable {
+    public init(object: JSONObject) throws {
+        let decoder = JSONDecoder(object: object)
+        edges = try decoder.decode("edges")
+        center = try decoder.decode("center")
+        type = try decoder.decode("type")
+    }
+}
 
 
 class World
 {
-    var Shapes: Shape
+    var shapes: Shape
     //var Worldfile: String
     
-    init?(jsonString: String) {
+    init?(jsonString: [String: Any]) {
         do {
-            Shapes = try Shape(JSONDecoder(jsonString))
+            try shapes = try Shape(object: jsonString)
         } catch {
             return nil
         }
