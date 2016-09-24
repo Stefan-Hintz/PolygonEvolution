@@ -28,26 +28,21 @@ class Document: NSDocument
 
 	override func data(ofType typeName: String) throws -> Data
 	{
-		let string = ""
+		let json = world.toJSON()
 
-		if let value = string.data(using: String.Encoding.utf8)
-		{
-			return value
-		}
-
-		throw NSError(domain: "PolygonEvolution", code: 1, userInfo: nil)
+		return try JSONSerialization.data(withJSONObject: json, options: [])
 	}
 
 	override func read(from data: Data, ofType typeName: String) throws
 	{
-		if let jsonObject = try JSONSerialization.jsonObject(with: data, options: []) as? [String : Any] 		{
-            try world.fromJSON(object: jsonObject)
+		if let jsonObject = try JSONSerialization.jsonObject(with: data, options: []) as? [String : Any]
+		{
+			world.fromJSON(object: jsonObject)
 
 			if let viewController = self.viewController
 			{
 				viewController.representedObject = self
 			}
-			
 
             return
 		}
