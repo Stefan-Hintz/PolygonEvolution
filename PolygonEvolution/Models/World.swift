@@ -1,5 +1,5 @@
 //
-//  world.swift
+//  World.swift
 //  PolygonEvolution
 //
 //  Created by Morris Winkler on 24/09/16.
@@ -9,15 +9,15 @@
 import Foundation
 import JSONJoy
 
-public typealias Scalar = Float
+public typealias Scalar = Double
 
 public struct Vector2: JSONJoy {
     public var x: Scalar
     public var y: Scalar
     
     public init(_ decoder: JSONDecoder) throws {
-        x = try decoder["x"].getFloat()
-        y = try decoder["x"].getFloat()
+        x = try decoder["x"].getDouble()
+        y = try decoder["y"].getDouble()
     }
 }
 
@@ -66,13 +66,10 @@ public struct Shape: JSONJoy{
     }
 }
 
-
-
 class World
 {
     var Shapes: Shape
-    //var Worldfile: String
-    
+
     init?(jsonString: String) {
         do {
             Shapes = try Shape(JSONDecoder(jsonString))
