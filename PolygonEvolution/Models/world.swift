@@ -80,4 +80,6 @@ class World
             return nil
         }
     }
+    
+    saveToJson
 }

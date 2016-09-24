@@ -9,6 +9,9 @@ import Cocoa
 class Document: NSDocument
 {
 	weak var windowController: NSWindowController!
+    
+    var world = World()
+    
 
 	override class func autosavesInPlace() -> Bool
 	{

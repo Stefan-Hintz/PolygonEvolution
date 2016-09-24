@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CEE343A31D96B8F500F8ACEA /* world.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE343A21D96B8F500F8ACEA /* world.swift */; };
 		F84CB73B1D9694B60019EE83 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84CB73A1D9694B60019EE83 /* View.swift */; };
 		F84CB73D1D96A0670019EE83 /* Angle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84CB73C1D96A0670019EE83 /* Angle.swift */; };
 		F84CB73F1D96AA620019EE83 /* Examples in Resources */ = {isa = PBXBuildFile; fileRef = F84CB73E1D96AA620019EE83 /* Examples */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CEE343A21D96B8F500F8ACEA /* world.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = world.swift; path = Models/world.swift; sourceTree = "<group>"; };
 		F84CB73A1D9694B60019EE83 /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		F84CB73C1D96A0670019EE83 /* Angle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Angle.swift; sourceTree = "<group>"; };
 		F84CB73E1D96AA620019EE83 /* Examples */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Examples; sourceTree = SOURCE_ROOT; };
@@ -41,6 +43,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CEE343A41D96B90600F8ACEA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CEE343A21D96B8F500F8ACEA /* world.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		F84CB7391D9694840019EE83 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -77,6 +87,7 @@
 				F8D511581D96753200F74937 /* Main.storyboard */,
 				F8D5115B1D96753200F74937 /* Info.plist */,
 				F84CB73C1D96A0670019EE83 /* Angle.swift */,
+				CEE343A41D96B90600F8ACEA /* Models */,
 			);
 			path = PolygonEvolution;
 			sourceTree = "<group>";
@@ -154,6 +165,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEE343A31D96B8F500F8ACEA /* world.swift in Sources */,
 				F84CB73B1D9694B60019EE83 /* View.swift in Sources */,
 				F84CB73D1D96A0670019EE83 /* Angle.swift in Sources */,
 				F8D511531D96753200F74937 /* ViewController.swift in Sources */,
