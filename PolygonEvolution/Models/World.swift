@@ -226,8 +226,9 @@ class World
     
     func fromJSON(object: [String: Any])
     {
+        var worldObject = object["world"] as! [String: Any]
         
-        let dictArray = object["shapes"] as! [[String : Any]]
+        let dictArray = worldObject["shapes"] as! [[String : Any]]
         shapes = [Shape]()
         
         for s in dictArray
@@ -242,7 +243,7 @@ class World
     func toJSON() -> [String: Any]
     {
         var object = [String: Any]()
-        
+        var worldObject = [String: Any]()
         object["name"] = name
         
         var shapeDict = [[String: Any]]()
@@ -251,10 +252,46 @@ class World
             shapeDict.append(s.toJSON())
         }
         
-        return object
+        worldObject["world"] = object
+        return worldObject
     }
 }
 
+let exampleWorldFile: [String: Any] = [
+    "world": [
+        "name" : "testworld",
+        "shapes": [
+            [
+                "vertices": [
+                    [
+                        "x": 0.0,
+                        "y": 0.0
+                    ],
+                    [
+                        "x": 1.0,
+                        "y": 0.0
+                    ],
+                    [
+                        "x": 1.0,
+                        "y": 1.0
+                    ],
+                    [
+                        "x": 0.0,
+                        "y": 1.0
+                    ],
+                ],
+                "center": [
+                    "x": 0.0,
+                    "y": 0.0
+                ],
+                "type": [
+                    "name": "Square",
+                    "id": "90-90-90-90"
+                ]
+            ]
+        ]
+    ]
+]
 
 
 

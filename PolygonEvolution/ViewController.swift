@@ -10,7 +10,7 @@ let SIZE = 20.0
 
 class ViewController: NSViewController
 {
-    var worldClass = WorldClass()
+    var world = World()
 
     override func viewDidLoad()
 	{
@@ -24,7 +24,7 @@ class ViewController: NSViewController
 		if let window = view.window, let windowController = window.windowController, let document = windowController.document as? Document
 		{
 			document.viewController = self
-			show(model: document.worldClass)
+			show(model: document.world)
 		}
 	}
 
@@ -34,7 +34,7 @@ class ViewController: NSViewController
 		{
 			if let document = representedObject as? Document
 			{
-				show(model: document.worldClass)
+				show(model: document.world)
 			}
 		}
 	}
@@ -96,11 +96,11 @@ class ViewController: NSViewController
 		view.layer?.addSublayer(shapeLayer)
 	}
 
-	func show(model: WorldClass)
+	func show(model: World)
 	{
-		worldClass = model
+		world = model
 
-		for shape in worldClass.world.shapes
+		for shape in world.shapes
 		{
 			addShape(shape: shape)
 		}

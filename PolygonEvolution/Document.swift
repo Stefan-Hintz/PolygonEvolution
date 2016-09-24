@@ -11,7 +11,7 @@ class Document: NSDocument
 	weak var windowController: NSWindowController!
 	weak var viewController: ViewController!
 
-    var worldClass = WorldClass()
+    var world = World()
     
 	override class func autosavesInPlace() -> Bool
 	{
@@ -41,7 +41,7 @@ class Document: NSDocument
 	override func read(from data: Data, ofType typeName: String) throws
 	{
 		if let jsonObject = try JSONSerialization.jsonObject(with: data, options: []) as? [String : Any] 		{
-            try worldClass.loadJSON(object: jsonObject)
+            try world.fromJSON(object: jsonObject)
 
 			if let viewController = self.viewController
 			{
