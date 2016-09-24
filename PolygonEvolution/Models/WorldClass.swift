@@ -11,7 +11,7 @@ import Foundation
 
 class WorldClass
 {
-    var world = try! WorldFile(object: exampleWorldJSON)
+    var world = try! WorldFile(object: exampleWorld)
     
     init() {
     }
@@ -21,7 +21,7 @@ class WorldClass
     }
 }
 
-let exampleWorldJSON: [String: Any] = [
+let exampleWorld: [String: Any] = [
     "world": [
         "name" : "testworld",
         "shapes": [

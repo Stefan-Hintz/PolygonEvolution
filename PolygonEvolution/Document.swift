@@ -42,7 +42,7 @@ class Document: NSDocument
 	{
 		if let jsonObject = try JSONSerialization.jsonObject(with: data, options: []) as? [String : Any]
 		{
-            try worldClass.loadJSON(JSONdict: exampleWorldJSON)
+            try worldClass.loadJSON(JSONdict: exampleWorld)
             
             return
 		}
