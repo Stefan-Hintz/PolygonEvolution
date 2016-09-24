@@ -9,12 +9,12 @@
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
-				<string>girih</string>
+				<string>gons</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string></string>
 			<key>CFBundleTypeName</key>
-			<string>DocumentType</string>
+			<string>Polygon DocumentType</string>
 			<key>CFBundleTypeOSTypes</key>
 			<array>
 				<string>????</string>
