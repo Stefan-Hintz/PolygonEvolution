@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE5BFB9A1D96C6F700217608 /* JSONJoy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5BFB991D96C6F700217608 /* JSONJoy.framework */; };
+		CE5BFB9B1D96C7D900217608 /* JSONJoy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE5BFB991D96C6F700217608 /* JSONJoy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CEE343A31D96B8F500F8ACEA /* world.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE343A21D96B8F500F8ACEA /* world.swift */; };
 		F84CB73B1D9694B60019EE83 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84CB73A1D9694B60019EE83 /* View.swift */; };
 		F84CB73D1D96A0670019EE83 /* Angle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84CB73C1D96A0670019EE83 /* Angle.swift */; };
@@ -18,7 +20,21 @@
 		F8D5115A1D96753200F74937 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8D511581D96753200F74937 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		CE5BFB841D96C53B00217608 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				CE5BFB9B1D96C7D900217608 /* JSONJoy.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		CE5BFB991D96C6F700217608 /* JSONJoy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = JSONJoy.framework; sourceTree = "<group>"; };
 		CEE343A21D96B8F500F8ACEA /* world.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = world.swift; path = Models/world.swift; sourceTree = "<group>"; };
 		F84CB73A1D9694B60019EE83 /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		F84CB73C1D96A0670019EE83 /* Angle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Angle.swift; sourceTree = "<group>"; };
@@ -37,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE5BFB9A1D96C6F700217608 /* JSONJoy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +79,7 @@
 		F8D511441D96753200F74937 = {
 			isa = PBXGroup;
 			children = (
+				CE5BFB991D96C6F700217608 /* JSONJoy.framework */,
 				F8D5114F1D96753200F74937 /* PolygonEvolution */,
 				F8D5114E1D96753200F74937 /* Products */,
 			);
@@ -102,6 +120,7 @@
 				F8D511491D96753200F74937 /* Sources */,
 				F8D5114A1D96753200F74937 /* Frameworks */,
 				F8D5114B1D96753200F74937 /* Resources */,
+				CE5BFB841D96C53B00217608 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -284,6 +303,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = LP79SBZ8M8;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = PolygonEvolution/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
@@ -299,6 +323,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = LP79SBZ8M8;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = PolygonEvolution/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
