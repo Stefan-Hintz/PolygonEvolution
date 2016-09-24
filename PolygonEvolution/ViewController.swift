@@ -110,5 +110,26 @@ class ViewController: NSViewController
 	{
 		view.layer?.sublayerTransform = CATransform3DMakeTranslation(view.bounds.size.width * 0.5, view.bounds.size.height * 0.5, 0.0)
 	}
+
+	override func mouseDown(with event: NSEvent)
+	{
+		iterate()
+	}
+
+	func iterate()
+	{
+		survive()
+		birth()
+	}
+
+	func survive()
+	{
+
+	}
+
+	func birth()
+	{
+
+	}
 }
 
