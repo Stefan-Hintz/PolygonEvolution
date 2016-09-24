@@ -8,6 +8,8 @@ import Cocoa
 
 class ViewController: NSViewController
 {
+	var world = World(object: [:])
+
 	override func viewDidLoad()
 	{
 		super.viewDidLoad()
@@ -16,7 +18,7 @@ class ViewController: NSViewController
 
 		let shapeLayer = CAShapeLayer()
 
-		shapeLayer.fillColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1).cgColor
+		shapeLayer.fillColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1).cgColor
 		shapeLayer.strokeColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).cgColor
 		shapeLayer.lineWidth = 2.0
 		shapeLayer.lineJoin = kCALineJoinRound
@@ -38,8 +40,25 @@ class ViewController: NSViewController
 	{
 		didSet
 		{
-			// Update the view, if already loaded.
+			if let window = view.window, let windowController = window.windowController, let document = windowController.document as? Document
+			{
+				document.viewController = self
+
+				if let world = document.world
+				{
+					// Update the view, if already loaded.
+					show(model: world)
+				}
+			}
 		}
+	}
+
+	func show(model: World)
+	{
+		world = model
+
+
+
 	}
 
 	func updateTransformation(animate: Bool)
