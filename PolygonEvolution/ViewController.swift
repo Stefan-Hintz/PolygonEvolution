@@ -96,7 +96,7 @@ class ViewController: NSViewController
 	{
 		worldClass = model
 
-		for shape in worldClass.world.world.shapes
+		for shape in worldClass.world.shapes
 		{
 			addShape(shape: shape)
 		}

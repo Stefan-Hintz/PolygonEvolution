@@ -101,7 +101,6 @@ extension World: JSONDecodable {
 public struct WorldFile
 {
     var world: World
-    //var Worldfile: String
     
 }
 
