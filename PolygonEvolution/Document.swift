@@ -42,8 +42,13 @@ class Document: NSDocument
 	{
 		if let jsonObject = try JSONSerialization.jsonObject(with: data, options: []) as? [String : Any]
 		{
-            try worldClass.loadJSON(JSONdict: exampleWorld)
-            
+            try worldClass.loadJSON(JSONdict: jsonObject)
+
+			if let viewController = viewController
+			{
+				viewController.representedObject = self
+			}
+			
             return
 		}
 

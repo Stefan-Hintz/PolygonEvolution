@@ -9,53 +9,53 @@
 import Foundation
 import JSONCodable
 
-public typealias Scalar = Double
+typealias Scalar = Double
 
-public struct Vector2 {
-    public var x: Scalar
-    public var y: Scalar
+struct Vector2 {
+    var x: Scalar
+    var y: Scalar
 }
 
 extension Vector2: JSONDecodable {
-    public init(object: JSONObject) throws {
+    init(object: JSONObject) throws {
         let decoder = JSONDecoder(object: object)
             x = try decoder.decode("x")
             y = try decoder.decode("y")
     }
 }
 
-public struct Edge {
+struct Edge {
     var start: Vector2
     var end: Vector2
 }
 
 extension Edge: JSONDecodable {
-    public init(object: JSONObject) throws {
+    init(object: JSONObject) throws {
         let decoder = JSONDecoder(object: object)
         start = try decoder.decode("start")
         end = try decoder.decode("end")
     }
 }
 
-public struct ShapeType {
-    public var name: String
-    public var id: String
+struct ShapeType {
+    var name: String
+    var id: String
 }
 
 extension ShapeType: JSONDecodable {
-    public init(object: JSONObject) throws {
+    init(object: JSONObject) throws {
         let decoder = JSONDecoder(object: object)
         name = try decoder.decode("name")
         id = try decoder.decode("id")
     }
 }
 
-public struct Shape{
+struct Shape{
     var angles = [Angle]()
-    public var edges: [Edge]
-    public var vertices: [Vector2]
-    public var center: Vector2
-    public var type: ShapeType
+    var edges: [Edge]
+    var vertices: [Vector2]
+    var center: Vector2
+    var type: ShapeType
     
     mutating func genEdges() {
         
@@ -69,7 +69,7 @@ public struct Shape{
 }
 
 extension Shape: JSONDecodable {
-    public init(object: JSONObject) throws {
+    init(object: JSONObject) throws {
         let decoder = JSONDecoder(object: object)
         vertices = try decoder.decode("vertices")
         center = try decoder.decode("center")
@@ -81,7 +81,7 @@ extension Shape: JSONDecodable {
     }
 }
 
-public struct World
+struct World
 {
     var name: String
     var shapes: [Shape]
@@ -90,7 +90,7 @@ public struct World
 }
 
 extension World: JSONDecodable {
-    public init(object: JSONObject) throws {
+    init(object: JSONObject) throws {
         let decoder = JSONDecoder(object: object)
         name = try decoder.decode("name")
         shapes = try decoder.decode("shapes")
@@ -98,14 +98,14 @@ extension World: JSONDecodable {
 }
 
 
-public struct WorldFile
+struct WorldFile
 {
     var world: World
     
 }
 
 extension WorldFile: JSONDecodable {
-    public init(object: JSONObject) throws {
+    init(object: JSONObject) throws {
         let decoder = JSONDecoder(object: object)
         world = try decoder.decode("world")
     }

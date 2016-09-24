@@ -10,7 +10,6 @@ let SIZE = 20.0
 
 class ViewController: NSViewController
 {
-
     var worldClass = WorldClass()
 
     override func viewDidLoad()
@@ -18,18 +17,23 @@ class ViewController: NSViewController
 		super.viewDidLoad()
 
 		updateTransformation(animate: false)
+	}
 
-		addShape()
+	override func viewWillAppear()
+	{
+		if let window = view.window, let windowController = window.windowController, let document = windowController.document as? Document
+		{
+			document.viewController = self
+			show(model: document.worldClass)
+		}
 	}
 
 	override var representedObject: Any?
 	{
 		didSet
 		{
-			if let window = view.window, let windowController = window.windowController, let document = windowController.document as? Document
+			if let document = representedObject as? Document
 			{
-				document.viewController = self
-
 				show(model: document.worldClass)
 			}
 		}
