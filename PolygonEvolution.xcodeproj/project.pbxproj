@@ -10,6 +10,7 @@
 		F84CB73B1D9694B60019EE83 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84CB73A1D9694B60019EE83 /* View.swift */; };
 		F84CB73D1D96A0670019EE83 /* Angle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84CB73C1D96A0670019EE83 /* Angle.swift */; };
 		F84CB73F1D96AA620019EE83 /* Examples in Resources */ = {isa = PBXBuildFile; fileRef = F84CB73E1D96AA620019EE83 /* Examples */; };
+		CE4DE7C81D969234009A8702 /* world.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4DE7C71D969234009A8702 /* world.swift */; };
 		F8D511511D96753200F74937 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D511501D96753200F74937 /* AppDelegate.swift */; };
 		F8D511531D96753200F74937 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D511521D96753200F74937 /* ViewController.swift */; };
 		F8D511551D96753200F74937 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D511541D96753200F74937 /* Document.swift */; };
@@ -21,6 +22,7 @@
 		F84CB73A1D9694B60019EE83 /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		F84CB73C1D96A0670019EE83 /* Angle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Angle.swift; sourceTree = "<group>"; };
 		F84CB73E1D96AA620019EE83 /* Examples */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Examples; sourceTree = SOURCE_ROOT; };
+		CE4DE7C71D969234009A8702 /* world.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = world.swift; path = Models/world.swift; sourceTree = "<group>"; };
 		F8D5114D1D96753200F74937 /* PolygonEvolution.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PolygonEvolution.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8D511501D96753200F74937 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F8D511521D96753200F74937 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +49,12 @@
 				F84CB73A1D9694B60019EE83 /* View.swift */,
 			);
 			name = View;
+		CE4DE7C91D96925D009A8702 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CE4DE7C71D969234009A8702 /* world.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		F8D511441D96753200F74937 = {
@@ -77,6 +85,7 @@
 				F8D511581D96753200F74937 /* Main.storyboard */,
 				F8D5115B1D96753200F74937 /* Info.plist */,
 				F84CB73C1D96A0670019EE83 /* Angle.swift */,
+				CE4DE7C91D96925D009A8702 /* Models */,
 			);
 			path = PolygonEvolution;
 			sourceTree = "<group>";
@@ -158,6 +167,7 @@
 				F84CB73D1D96A0670019EE83 /* Angle.swift in Sources */,
 				F8D511531D96753200F74937 /* ViewController.swift in Sources */,
 				F8D511511D96753200F74937 /* AppDelegate.swift in Sources */,
+				CE4DE7C81D969234009A8702 /* world.swift in Sources */,
 				F8D511551D96753200F74937 /* Document.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
