@@ -248,9 +248,12 @@ class World
         
         var shapeDict = [[String: Any]]()
         
-        for s in shapes {
+        for s in shapes
+        {
             shapeDict.append(s.toJSON())
         }
+        
+        object["shapes"] = shapeDict
         
         worldObject["world"] = object
         return worldObject
