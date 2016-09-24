@@ -9,7 +9,8 @@ import Cocoa
 class Document: NSDocument
 {
 	weak var windowController: NSWindowController!
-    
+	weak var viewController: ViewController!
+
     var world = World(jsonString: [:])
 
 	override class func autosavesInPlace() -> Bool
@@ -39,11 +40,15 @@ class Document: NSDocument
 
 	override func read(from data: Data, ofType typeName: String) throws
 	{
-		if let string = String(data: data, encoding: String.Encoding.utf8)
+		do
 		{
-            world = World(jsonString: [:])
+			let json = try JSONSerialization.jsonObject(with: data)
+			if let json = json as? [String : Any]
+			{
+				world = World(jsonString: json)
 
-			return
+				return
+			}
 		}
 
 		throw NSError(domain: "PolygonEvolution", code: 2, userInfo: nil)
