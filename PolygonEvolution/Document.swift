@@ -11,11 +11,8 @@ class Document: NSDocument
 	weak var windowController: NSWindowController!
 	weak var viewController: ViewController!
 
-	var world: World =
-		{
-			try! World(object: [ : ])
-		}()
-
+    var worldClass = WorldClass()
+    
 	override class func autosavesInPlace() -> Bool
 	{
 		return true
@@ -45,9 +42,9 @@ class Document: NSDocument
 	{
 		if let jsonObject = try JSONSerialization.jsonObject(with: data, options: []) as? [String : Any]
 		{
-			world = try World(object: jsonObject)
-
-			return
+            try worldClass.loadJSON(JSONdict: exampleWorldJSON)
+            
+            return
 		}
 
 		throw NSError(domain: "PolygonEvolution", code: 2, userInfo: nil)

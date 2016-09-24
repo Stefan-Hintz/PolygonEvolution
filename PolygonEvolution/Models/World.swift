@@ -24,24 +24,23 @@ extension Vector2: JSONDecodable {
     }
 }
 
-
 public struct Edge {
-    public var vertices: [Vector2]
+    var start: Vector2
+    var end: Vector2
 }
 
 extension Edge: JSONDecodable {
     public init(object: JSONObject) throws {
         let decoder = JSONDecoder(object: object)
-        vertices = try decoder.decode("vertices")
+        start = try decoder.decode("start")
+        end = try decoder.decode("end")
     }
 }
-
 
 public struct ShapeType {
     public var name: String
     public var id: String
 }
-
 
 extension ShapeType: JSONDecodable {
     public init(object: JSONObject) throws {
@@ -52,70 +51,68 @@ extension ShapeType: JSONDecodable {
 }
 
 public struct Shape{
+    var angles = [Angle]()
     public var edges: [Edge]
+    public var vertices: [Vector2]
     public var center: Vector2
     public var type: ShapeType
+    
+    mutating func genEdges() {
+        
+        let count = vertices.count
+        
+        for i in 0..<count-2  {
+            edges.append(Edge(start: vertices[i], end: vertices[i+1]))
+        }
+        edges.append(Edge(start:vertices[count-1], end: vertices[0]))
+    }
 }
-
 
 extension Shape: JSONDecodable {
     public init(object: JSONObject) throws {
         let decoder = JSONDecoder(object: object)
-        edges = try decoder.decode("edges")
+        vertices = try decoder.decode("vertices")
         center = try decoder.decode("center")
         type = try decoder.decode("type")
+    
+        angles = [Angle]()
+        edges = [Edge]()
+        self.genEdges()
     }
 }
 
-
 public struct World
 {
+    var name: String
     var shapes: [Shape]
-    //var Worldfile: String
+   
 
 }
-
 
 extension World: JSONDecodable {
     public init(object: JSONObject) throws {
         let decoder = JSONDecoder(object: object)
+        name = try decoder.decode("name")
         shapes = try decoder.decode("shapes")
     }
 }
 
-let exampleWorldJSON: [String: Any] = [
-    "shapes": [
-        [
-        "edges": [
-            [
-                "vertices": [
-                    [
-                        "x": 0.0,
-                        "y": 0.0
-                    ],
-                    [
-                        "x": 1.0,
-                        "y": 0.0
-                    ],
-                    [
-                        "x": 1.0,
-                        "y": 1.0
-                    ],
-                    [
-                        "x": 0.0,
-                        "y": 1.0
-                    ],
-                ]
-            ],
-        ],
-        "center": [
-            "x": 0.0,
-            "y": 0.0
-        ],
-        "type": [
-            "name": "Square",
-            "id": "90-90-90-90"
-        ]
-    ]
-]
-]
+
+public struct WorldFile
+{
+    var world: World
+    //var Worldfile: String
+    
+}
+
+extension WorldFile: JSONDecodable {
+    public init(object: JSONObject) throws {
+        let decoder = JSONDecoder(object: object)
+        world = try decoder.decode("world")
+    }
+}
+
+
+
+
+

@@ -10,12 +10,10 @@ let SIZE = 20.0
 
 class ViewController: NSViewController
 {
-	var world =
-	{
-		try! World(object: [ : ])
-	}()
-	
-	override func viewDidLoad()
+
+    var worldClass = WorldClass()
+
+    override func viewDidLoad()
 	{
 		super.viewDidLoad()
 
@@ -32,7 +30,7 @@ class ViewController: NSViewController
 			{
 				document.viewController = self
 
-				show(model: document.world)
+				show(model: document.worldClass)
 			}
 		}
 	}
@@ -72,10 +70,8 @@ class ViewController: NSViewController
 
 		var first = true
 
-		for edge in shape.edges
+		for vertex in shape.vertices
 		{
-			let vertex = edge.vertices.first!
-
 			if first
 			{
 				first = false
@@ -85,6 +81,7 @@ class ViewController: NSViewController
 			else
 			{
 				path.addLine(to: CGPoint(x: SIZE * vertex.x, y: SIZE * vertex.y))
+
 			}
 		}
 
@@ -95,11 +92,11 @@ class ViewController: NSViewController
 		view.layer?.addSublayer(shapeLayer)
 	}
 
-	func show(model: World)
+	func show(model: WorldClass)
 	{
-		world = model
+		worldClass = model
 
-		for shape in world.shapes
+		for shape in worldClass.world.world.shapes
 		{
 			addShape(shape: shape)
 		}
