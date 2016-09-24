@@ -68,51 +68,54 @@ extension Shape: JSONDecodable {
 }
 
 
-class World
+public struct World
 {
-    var shapes: Shape
+    var shapes: [Shape]
     //var Worldfile: String
-    
-    init?(jsonString: [String: Any]) {
-        do {
-            try shapes = try Shape(object: jsonString)
-        } catch {
-            return nil
-        }
-    }
 
 }
 
+
+extension World: JSONDecodable {
+    public init(object: JSONObject) throws {
+        let decoder = JSONDecoder(object: object)
+        shapes = try decoder.decode("shapes")
+    }
+}
+
 let exampleWorldJSON: [String: Any] = [
-    "edges": [
+    "shapes": [
         [
-            "vertices": [
-                [
-                    "x": 0,
-                    "y": 0
-                ],
-                [
-                    "x": 1,
-                    "y": 0
-                ],
-                
-                [
-                    "x": 1,
-                    "y": 1
-                ],
-                [
-                    "x": 0,
-                    "y": 1
-                ],
-            ]
+        "edges": [
+            [
+                "vertices": [
+                    [
+                        "x": 0.0,
+                        "y": 0.0
+                    ],
+                    [
+                        "x": 1.0,
+                        "y": 0.0
+                    ],
+                    [
+                        "x": 1.0,
+                        "y": 1.0
+                    ],
+                    [
+                        "x": 0.0,
+                        "y": 1.0
+                    ],
+                ]
+            ],
         ],
-    ],
-    "center": [
-        "x": 0,
-        "y": 0
-    ],
-    "type": [
-        "name": "Square",
-        "id": "90-90-90-90"
+        "center": [
+            "x": 0.0,
+            "y": 0.0
+        ],
+        "type": [
+            "name": "Square",
+            "id": "90-90-90-90"
+        ]
     ]
+]
 ]
