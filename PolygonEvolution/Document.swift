@@ -40,15 +40,15 @@ class Document: NSDocument
 
 	override func read(from data: Data, ofType typeName: String) throws
 	{
-		if let jsonObject = try JSONSerialization.jsonObject(with: data, options: []) as? [String : Any]
-		{
-            try worldClass.loadJSON(JSONdict: jsonObject)
+		if let jsonObject = try JSONSerialization.jsonObject(with: data, options: []) as? [String : Any] 		{
+            try worldClass.loadJSON(object: jsonObject)
 
-			if let viewController = viewController
+			if let viewController = self.viewController
 			{
 				viewController.representedObject = self
 			}
 			
+
             return
 		}
 

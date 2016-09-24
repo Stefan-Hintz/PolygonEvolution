@@ -11,105 +11,250 @@ import JSONCodable
 
 typealias Scalar = Double
 
-struct Vector2 {
-    var x: Scalar
-    var y: Scalar
-}
-
-extension Vector2: JSONDecodable {
-    init(object: JSONObject) throws {
-        let decoder = JSONDecoder(object: object)
-            x = try decoder.decode("x")
-            y = try decoder.decode("y")
-    }
-}
-
-struct Edge {
-    var start: Vector2
-    var end: Vector2
-}
-
-extension Edge: JSONDecodable {
-    init(object: JSONObject) throws {
-        let decoder = JSONDecoder(object: object)
-        start = try decoder.decode("start")
-        end = try decoder.decode("end")
-    }
-}
-
-struct ShapeType {
-    var name: String
-    var id: String
-}
-
-extension ShapeType: JSONDecodable {
-    init(object: JSONObject) throws {
-        let decoder = JSONDecoder(object: object)
-        name = try decoder.decode("name")
-        id = try decoder.decode("id")
-    }
-}
-
-struct Shape{
-    var angles = [Angle]()
-    var edges: [Edge]
-    var vertices: [Vector2]
-    var center: Vector2
-    var type: ShapeType
+class Vector2
+{
+    var x = 0.0
+    var y = 0.0
     
-    mutating func genEdges() {
+    func setVector(x: Double, y: Double)
+    {
+        self.x = x
+        self.y = y
+    }
+    
+    func fromJSON(object: [String: Any])
+    {
+        if let x = object["x"] as? Scalar
+        {
+            self.x = x
+        }
+        if let y = object["y"] as? Scalar
+        {
+            self.y = y
+        }
+    }
+    
+    func toJSON() -> [String: Any]
+    {
+        var object = [String: Any]()
+        object["x"] = x
+        object["y"] = y
+        
+        return object
+    }
+    
+}
+
+class Edge
+{
+    
+    var start = Vector2()
+    var end = Vector2()
+
+    func setEdge(start: Vector2, end: Vector2)
+    {
+        self.start = start
+        self.end = end
+    }
+    
+    func fromJSON(object: [String: Any])
+    {
+        
+        start.fromJSON(object: object["start"] as! [String : Any])
+        end.fromJSON(object: object["end"] as! [String : Any])
+        
+    }
+    
+    func toJSON() -> [String: Any] {
+        var object = [String: Any]()
+        
+        object["start"] = start.toJSON()
+        object["end"] = end.toJSON()
+        
+        return object
+    }
+
+
+}
+
+
+class ShapeType
+{
+    var name = ""
+    var id = ""
+
+    func fromJSON(object: [String: Any])
+    {
+        name = object["name"] as! String
+        id = object["id"] as! String
+    }
+    
+    func toJSON() -> [String: Any] {
+        var object = [String: Any]()
+
+        object["name"] = name
+        object["id"] = id
+
+        return object
+    }
+}
+
+class Shape
+{
+    var angles = [Angle]()
+    var edges = [Edge]()
+    var vertices = [Vector2]()
+    var center = Vector2()
+    var type = ShapeType()
+    
+    
+    
+    func fromJSON(object: [String: Any])
+    {
+    
+        let dictArray = object["vertices"] as! [[String : Any]]
+        vertices = [Vector2]()
+
+        for v in dictArray
+        {
+            let v1 = Vector2()
+            v1.fromJSON(object: v)
+            vertices.append(v1)
+        }
+        
+        type.fromJSON(object: object["type"] as! [String: Any])
+    }
+    
+    func toJSON() -> [String: Any]
+    {
+        var object = [String: Any]()
+        
+        
+        var verticDict = [[String: Any]]()
+        
+        for v in vertices {
+            verticDict.append(v.toJSON())
+        }
+    
+        object["vertices"] = verticDict
+        object["center"] = center.toJSON()
+        object["type"] = type.toJSON()
+        
+        return object
+    }
+
+    
+    func calcAngles()
+    {
+        
+        let count = vertices.count
+        let countLess = count - 1
+        
+        var angleCollection = [Angle]()
+        
+        for variant in 0..<count
+        {
+        
+        /*
+            Angle Order
+            _________
+           4|       |3
+            |       |
+            |       |
+           1|_______|2
+             
+        */
+            let vertex0 = vertices[(variant + (countLess)) % vertices.count]
+            let vertex1 = vertices[variant]
+            let vertex2 = vertices[(variant + 1) % vertices.count]
+        
+            let v0x = vertex0.x - vertex1.x
+            let v0y = vertex0.y - vertex1.y
+            let v1x = vertex2.x - vertex1.x
+            let v1y = vertex2.y - vertex1.y
+        
+            var angle = atan2(v0y, v0x) - atan2(v1y, v1x)
+            if angle < 0.0
+            {
+                angle += π + π
+            }
+            
+            let a = Angle()
+            a.setRadian(r: angle)
+            angleCollection.append(a)
+        }
+        angles = angleCollection
+    }
+    
+    func calcEdges()
+    {
         
         let count = vertices.count
         
-        for i in 0..<count-2  {
-            edges.append(Edge(start: vertices[i], end: vertices[i+1]))
+        for i in 0..<count-1  {
+            let e = Edge()
+            e.setEdge(start: vertices[i], end: vertices[i+1])
+            edges.append(e)
         }
-        edges.append(Edge(start:vertices[count-1], end: vertices[0]))
+        
+        let e = Edge()
+        e.setEdge(start: vertices[count-1], end: vertices[0])
+        edges.append(e)
     }
-}
-
-extension Shape: JSONDecodable {
-    init(object: JSONObject) throws {
-        let decoder = JSONDecoder(object: object)
-        vertices = try decoder.decode("vertices")
-        center = try decoder.decode("center")
-        type = try decoder.decode("type")
     
-        angles = [Angle]()
-        edges = [Edge]()
-        self.genEdges()
+    func calcCenter()
+    {
+        
+        var x = 0.0
+        var y = 0.0
+        
+        for v in vertices
+        {
+            x += v.x
+            y += v.y
+        }
+        
+        let count = Double(vertices.count)
+        center.setVector(x: x/count, y: y/count)
     }
 }
 
-struct World
+class World
 {
-    var name: String
-    var shapes: [Shape]
-   
-
-}
-
-extension World: JSONDecodable {
-    init(object: JSONObject) throws {
-        let decoder = JSONDecoder(object: object)
-        name = try decoder.decode("name")
-        shapes = try decoder.decode("shapes")
-    }
-}
-
-
-struct WorldFile
-{
-    var world: World
+    var name = ""
+    var shapes = [Shape]()
     
-}
+    func fromJSON(object: [String: Any])
+    {
+        
+        let dictArray = object["shapes"] as! [[String : Any]]
+        shapes = [Shape]()
+        
+        for s in dictArray
+        {
+            let s1 = Shape()
+            s1.fromJSON(object: s)
+            shapes.append(s1)
+        }
+    }
 
-extension WorldFile: JSONDecodable {
-    init(object: JSONObject) throws {
-        let decoder = JSONDecoder(object: object)
-        world = try decoder.decode("world")
+
+    func toJSON() -> [String: Any]
+    {
+        var object = [String: Any]()
+        
+        object["name"] = name
+        
+        var shapeDict = [[String: Any]]()
+        
+        for s in shapes {
+            shapeDict.append(s.toJSON())
+        }
+        
+        return object
     }
 }
+
 
 
 

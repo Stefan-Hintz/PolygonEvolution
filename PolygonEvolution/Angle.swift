@@ -8,12 +8,13 @@ import Cocoa
 
 let π = Double.pi
 
-struct Angle
+class Angle
 {
-	var nominator: Int
-	var divider: Int
-
-	func value() -> Double
+	var nominator = 0
+	var divider = 0
+    var radian = 0.0
+    
+    func value() -> Double
 	{
 		return Double(nominator) / Double(divider)
 	}
@@ -27,4 +28,8 @@ struct Angle
 	{
 		return value() * 2.0 * π
 	}
+    
+    func setRadian(r: Double) {
+        radian = r
+    }
 }

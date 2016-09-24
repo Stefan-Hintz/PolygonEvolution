@@ -11,18 +11,11 @@ import Foundation
 
 class WorldClass
 {
-    var worldFile = try! WorldFile(object: exampleWorldFile)
-    var world = try! World(object: exampleWorld)
+   var world = World()
     
-    init() {
+    func loadJSON(object: [String: Any]) throws {
+        world.fromJSON(object: object["world"] as! [String : Any])
     }
-    
-    func loadJSON(JSONdict: [String: Any]) throws {
-        worldFile = try! WorldFile(object: JSONdict)
-        world = worldFile.world
-    }
-    
-    
 }
 
 let exampleWorldFile: [String: Any] = [
@@ -56,40 +49,6 @@ let exampleWorldFile: [String: Any] = [
                     "name": "Square",
                     "id": "90-90-90-90"
                 ]
-            ]
-        ]
-    ]
-]
-
-let exampleWorld: [String: Any] = [
-    "name" : "testworld",
-    "shapes": [
-        [
-            "vertices": [
-                [
-                    "x": 0.0,
-                    "y": 0.0
-                ],
-                [
-                    "x": 1.0,
-                    "y": 0.0
-                ],
-                [
-                    "x": 1.0,
-                    "y": 1.0
-                ],
-                [
-                    "x": 0.0,
-                    "y": 1.0
-                ],
-            ],
-            "center": [
-                "x": 0.0,
-                "y": 0.0
-            ],
-            "type": [
-                "name": "Square",
-                "id": "90-90-90-90"
             ]
         ]
     ]
