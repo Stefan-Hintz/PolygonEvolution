@@ -2,9 +2,7 @@
 //  Document.swift
 //  PolygonEvolution
 //
-//  Created by Stefan Hintz on 24.09.16.
-//  Copyright © 2016 Stefan Hintz. All rights reserved.
-//
+//  Created by Stefan Hintz on 24.09.2016.
 
 import Cocoa
 

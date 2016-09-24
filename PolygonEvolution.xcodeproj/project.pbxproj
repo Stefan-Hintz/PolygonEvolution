@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F84CB73B1D9694B60019EE83 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84CB73A1D9694B60019EE83 /* View.swift */; };
 		F8D511511D96753200F74937 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D511501D96753200F74937 /* AppDelegate.swift */; };
 		F8D511531D96753200F74937 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D511521D96753200F74937 /* ViewController.swift */; };
 		F8D511551D96753200F74937 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D511541D96753200F74937 /* Document.swift */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F84CB73A1D9694B60019EE83 /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		F8D5114D1D96753200F74937 /* PolygonEvolution.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PolygonEvolution.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8D511501D96753200F74937 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F8D511521D96753200F74937 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -35,6 +37,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F84CB7391D9694840019EE83 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F84CB73A1D9694B60019EE83 /* View.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		F8D511441D96753200F74937 = {
 			isa = PBXGroup;
 			children = (
@@ -54,6 +64,7 @@
 		F8D5114F1D96753200F74937 /* PolygonEvolution */ = {
 			isa = PBXGroup;
 			children = (
+				F84CB7391D9694840019EE83 /* View */,
 				F8D511501D96753200F74937 /* AppDelegate.swift */,
 				F8D511521D96753200F74937 /* ViewController.swift */,
 				F8D511541D96753200F74937 /* Document.swift */,
@@ -136,6 +147,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F84CB73B1D9694B60019EE83 /* View.swift in Sources */,
 				F8D511531D96753200F74937 /* ViewController.swift in Sources */,
 				F8D511511D96753200F74937 /* AppDelegate.swift in Sources */,
 				F8D511551D96753200F74937 /* Document.swift in Sources */,
@@ -254,6 +266,7 @@
 				DEVELOPMENT_TEAM = LP79SBZ8M8;
 				INFOPLIST_FILE = PolygonEvolution/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = es.rockt.hintz.PolygonEvolution;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
@@ -268,6 +281,7 @@
 				DEVELOPMENT_TEAM = LP79SBZ8M8;
 				INFOPLIST_FILE = PolygonEvolution/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = es.rockt.hintz.PolygonEvolution;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
@@ -293,6 +307,7 @@
 				F8D511601D96753200F74937 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
