@@ -85,6 +85,7 @@
 		F85227AC1D96CBA900E54BC5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CE2D72411D96D49B00329C25 /* JSONCodable.framework */,
 				CE5BFB991D96C6F700217608 /* JSONJoy.framework */,
 			);
 			name = Frameworks;
@@ -93,7 +94,6 @@
 		F8D511441D96753200F74937 = {
 			isa = PBXGroup;
 			children = (
-				CE2D72411D96D49B00329C25 /* JSONCodable.framework */,
 				F85227AC1D96CBA900E54BC5 /* Frameworks */,
 				F8D5114F1D96753200F74937 /* PolygonEvolution */,
 				F8D5114E1D96753200F74937 /* Products */,

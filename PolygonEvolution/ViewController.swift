@@ -6,16 +6,39 @@
 
 import Cocoa
 
+let SIZE = 20.0
+
 class ViewController: NSViewController
 {
-	var world = World(object: [:])
-
+	var world =
+	{
+		try! World(object: [ : ])
+	}()
+	
 	override func viewDidLoad()
 	{
 		super.viewDidLoad()
 
 		updateTransformation(animate: false)
 
+		addShape()
+	}
+
+	override var representedObject: Any?
+	{
+		didSet
+		{
+			if let window = view.window, let windowController = window.windowController, let document = windowController.document as? Document
+			{
+				document.viewController = self
+
+				show(model: document.world)
+			}
+		}
+	}
+
+	func addShape()
+	{
 		let shapeLayer = CAShapeLayer()
 
 		shapeLayer.fillColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1).cgColor
@@ -36,29 +59,50 @@ class ViewController: NSViewController
 		view.layer?.addSublayer(shapeLayer)
 	}
 
-	override var representedObject: Any?
+	func addShape(shape:Shape)
 	{
-		didSet
-		{
-			if let window = view.window, let windowController = window.windowController, let document = windowController.document as? Document
-			{
-				document.viewController = self
+		let shapeLayer = CAShapeLayer()
 
-				if let world = document.world
-				{
-					// Update the view, if already loaded.
-					show(model: world)
-				}
+		shapeLayer.fillColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1).cgColor
+		shapeLayer.strokeColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).cgColor
+		shapeLayer.lineWidth = 2.0
+		shapeLayer.lineJoin = kCALineJoinRound
+
+		let path = CGMutablePath()
+
+		var first = true
+
+		for edge in shape.edges
+		{
+			let vertex = edge.vertices.first!
+
+			if first
+			{
+				first = false
+
+				path.move(to: CGPoint(x: SIZE * vertex.x, y: SIZE * vertex.y))
+			}
+			else
+			{
+				path.addLine(to: CGPoint(x: SIZE * vertex.x, y: SIZE * vertex.y))
 			}
 		}
+
+		path.closeSubpath()
+
+		shapeLayer.path = path
+
+		view.layer?.addSublayer(shapeLayer)
 	}
 
 	func show(model: World)
 	{
 		world = model
 
-
-
+		for shape in world.shapes
+		{
+			addShape(shape: shape)
+		}
 	}
 
 	func updateTransformation(animate: Bool)

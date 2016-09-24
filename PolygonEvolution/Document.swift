@@ -9,7 +9,12 @@ import Cocoa
 class Document: NSDocument
 {
 	weak var windowController: NSWindowController!
-    var world = try! World(object: [:])
+	weak var viewController: ViewController!
+
+	var world: World =
+		{
+			try! World(object: [ : ])
+		}()
 
 	override class func autosavesInPlace() -> Bool
 	{
@@ -38,10 +43,10 @@ class Document: NSDocument
 
 	override func read(from data: Data, ofType typeName: String) throws
 	{
-		if var string = String(data: data, encoding: String.Encoding.utf8)
+		if let jsonObject = try JSONSerialization.jsonObject(with: data, options: []) as? [String : Any]
 		{
-            world = try!    World(object: exampleWorldJSON)
-            
+			world = try World(object: jsonObject)
+
 			return
 		}
 
