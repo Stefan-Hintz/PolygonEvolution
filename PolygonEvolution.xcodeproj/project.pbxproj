@@ -9,9 +9,7 @@
 /* Begin PBXBuildFile section */
 		CE5BFB9A1D96C6F700217608 /* JSONJoy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5BFB991D96C6F700217608 /* JSONJoy.framework */; };
 		CE5BFB9B1D96C7D900217608 /* JSONJoy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE5BFB991D96C6F700217608 /* JSONJoy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		CEE343A31D96B8F500F8ACEA /* world.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE343A21D96B8F500F8ACEA /* world.swift */; };
-		CEFACF7C1D96CE8300412E44 /* JSONCodable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEFACF7B1D96CE8300412E44 /* JSONCodable.framework */; };
-		CEFACF7D1D96CFC600412E44 /* JSONCodable.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CEFACF7B1D96CE8300412E44 /* JSONCodable.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CEE343A31D96B8F500F8ACEA /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE343A21D96B8F500F8ACEA /* World.swift */; };
 		F84CB73B1D9694B60019EE83 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84CB73A1D9694B60019EE83 /* View.swift */; };
 		F84CB73D1D96A0670019EE83 /* Angle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84CB73C1D96A0670019EE83 /* Angle.swift */; };
 		F84CB73F1D96AA620019EE83 /* Examples in Resources */ = {isa = PBXBuildFile; fileRef = F84CB73E1D96AA620019EE83 /* Examples */; };
@@ -38,8 +36,7 @@
 
 /* Begin PBXFileReference section */
 		CE5BFB991D96C6F700217608 /* JSONJoy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = JSONJoy.framework; sourceTree = "<group>"; };
-		CEE343A21D96B8F500F8ACEA /* world.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = world.swift; path = Models/world.swift; sourceTree = "<group>"; };
-		CEFACF7B1D96CE8300412E44 /* JSONCodable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = JSONCodable.framework; sourceTree = "<group>"; };
+		CEE343A21D96B8F500F8ACEA /* World.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = World.swift; path = Models/World.swift; sourceTree = "<group>"; };
 		F84CB73A1D9694B60019EE83 /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		F84CB73C1D96A0670019EE83 /* Angle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Angle.swift; sourceTree = "<group>"; };
 		F84CB73E1D96AA620019EE83 /* Examples */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Examples; sourceTree = SOURCE_ROOT; };
@@ -68,7 +65,8 @@
 		CEE343A41D96B90600F8ACEA /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				CEE343A21D96B8F500F8ACEA /* world.swift */,
+				F84CB73C1D96A0670019EE83 /* Angle.swift */,
+				CEE343A21D96B8F500F8ACEA /* World.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -81,11 +79,19 @@
 			name = View;
 			sourceTree = "<group>";
 		};
-		F8D511441D96753200F74937 = {
+		F85227AC1D96CBA900E54BC5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				CEFACF7B1D96CE8300412E44 /* JSONCodable.framework */,
 				CE5BFB991D96C6F700217608 /* JSONJoy.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F8D511441D96753200F74937 = {
+			isa = PBXGroup;
+			children = (
+				F85227AC1D96CBA900E54BC5 /* Frameworks */,
 				F8D5114F1D96753200F74937 /* PolygonEvolution */,
 				F8D5114E1D96753200F74937 /* Products */,
 			);
@@ -110,7 +116,6 @@
 				F8D511561D96753200F74937 /* Assets.xcassets */,
 				F8D511581D96753200F74937 /* Main.storyboard */,
 				F8D5115B1D96753200F74937 /* Info.plist */,
-				F84CB73C1D96A0670019EE83 /* Angle.swift */,
 				CEE343A41D96B90600F8ACEA /* Models */,
 			);
 			path = PolygonEvolution;
@@ -190,7 +195,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEE343A31D96B8F500F8ACEA /* world.swift in Sources */,
+				CEE343A31D96B8F500F8ACEA /* World.swift in Sources */,
 				F84CB73B1D9694B60019EE83 /* View.swift in Sources */,
 				F84CB73D1D96A0670019EE83 /* Angle.swift in Sources */,
 				F8D511531D96753200F74937 /* ViewController.swift in Sources */,

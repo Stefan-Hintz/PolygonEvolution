@@ -1,5 +1,5 @@
 //
-//  world.swift
+//  World.swift
 //  PolygonEvolution
 //
 //  Created by Morris Winkler on 24/09/16.
@@ -9,7 +9,7 @@
 import Foundation
 import JSONCodable
 
-public typealias Scalar = Float
+public typealias Scalar = Double
 
 public struct Vector2 {
     public var x: Scalar
@@ -56,6 +56,7 @@ public struct Shape{
     public var center: Vector2
     public var type: ShapeType
 }
+
 
 extension Shape: JSONDecodable {
     public init(object: JSONObject) throws {

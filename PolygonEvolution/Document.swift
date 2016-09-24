@@ -41,6 +41,7 @@ class Document: NSDocument
 	{
 		if let string = String(data: data, encoding: String.Encoding.utf8)
 		{
+            world = World(jsonString: [:])
 
 			return
 		}
