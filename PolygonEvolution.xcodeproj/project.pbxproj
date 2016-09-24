@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F84CB73B1D9694B60019EE83 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84CB73A1D9694B60019EE83 /* View.swift */; };
+		F84CB73D1D96A0670019EE83 /* Angle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84CB73C1D96A0670019EE83 /* Angle.swift */; };
 		F8D511511D96753200F74937 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D511501D96753200F74937 /* AppDelegate.swift */; };
 		F8D511531D96753200F74937 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D511521D96753200F74937 /* ViewController.swift */; };
 		F8D511551D96753200F74937 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D511541D96753200F74937 /* Document.swift */; };
@@ -17,6 +18,7 @@
 
 /* Begin PBXFileReference section */
 		F84CB73A1D9694B60019EE83 /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		F84CB73C1D96A0670019EE83 /* Angle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Angle.swift; sourceTree = "<group>"; };
 		F8D5114D1D96753200F74937 /* PolygonEvolution.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PolygonEvolution.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8D511501D96753200F74937 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F8D511521D96753200F74937 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 				F8D511561D96753200F74937 /* Assets.xcassets */,
 				F8D511581D96753200F74937 /* Main.storyboard */,
 				F8D5115B1D96753200F74937 /* Info.plist */,
+				F84CB73C1D96A0670019EE83 /* Angle.swift */,
 			);
 			path = PolygonEvolution;
 			sourceTree = "<group>";
@@ -148,6 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F84CB73B1D9694B60019EE83 /* View.swift in Sources */,
+				F84CB73D1D96A0670019EE83 /* Angle.swift in Sources */,
 				F8D511531D96753200F74937 /* ViewController.swift in Sources */,
 				F8D511511D96753200F74937 /* AppDelegate.swift in Sources */,
 				F8D511551D96753200F74937 /* Document.swift in Sources */,
