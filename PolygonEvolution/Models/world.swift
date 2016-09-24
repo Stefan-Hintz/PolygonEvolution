@@ -57,7 +57,6 @@ public struct Shape{
     public var type: ShapeType
 }
 
-
 extension Shape: JSONDecodable {
     public init(object: JSONObject) throws {
         let decoder = JSONDecoder(object: object)
@@ -80,5 +79,39 @@ class World
             return nil
         }
     }
-    
+
 }
+
+let exampleWorldJSON: [String: Any] = [
+    "edges": [
+        [
+            "vertices": [
+                [
+                    "x": 0,
+                    "y": 0
+                ],
+                [
+                    "x": 1,
+                    "y": 0
+                ],
+                
+                [
+                    "x": 1,
+                    "y": 1
+                ],
+                [
+                    "x": 0,
+                    "y": 1
+                ],
+            ]
+        ],
+    ],
+    "center": [
+        "x": 0,
+        "y": 0
+    ],
+    "type": [
+        "name": "Square",
+        "id": "90-90-90-90"
+    ]
+]
