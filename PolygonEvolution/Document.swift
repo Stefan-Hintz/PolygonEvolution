@@ -8,6 +8,8 @@ import Cocoa
 
 class Document: NSDocument
 {
+	weak var windowController: NSWindowController!
+
 	override class func autosavesInPlace() -> Bool
 	{
 		return true
@@ -17,7 +19,7 @@ class Document: NSDocument
 	{
 		// Returns the Storyboard that contains your Document window.
 		let storyboard = NSStoryboard(name: "Main", bundle: nil)
-		let windowController = storyboard.instantiateController(withIdentifier: "Document Window Controller") as! NSWindowController
+		windowController = storyboard.instantiateController(withIdentifier: "Document Window Controller") as! NSWindowController
 		self.addWindowController(windowController)
 	}
 
