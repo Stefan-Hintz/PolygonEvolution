@@ -43,7 +43,6 @@ class Vector2
         
         return object
     }
-    
 }
 
 class Edge
@@ -59,13 +58,12 @@ class Edge
     
     func fromJSON(object: [String: Any])
     {
-        
         start.fromJSON(object: object["start"] as! [String : Any])
         end.fromJSON(object: object["end"] as! [String : Any])
-        
     }
     
-    func toJSON() -> [String: Any] {
+    func toJSON() -> [String: Any]
+	{
         var object = [String: Any]()
         
         object["start"] = start.toJSON()
@@ -252,38 +250,38 @@ class World
     }
 }
 
-let exampleWorldFile: [String: Any] = [
-    "world": [
-        "name" : "testworld",
-        "shapes": [
-            [
-                "vertices": [
-                    [
-                        "x": 0.0,
-                        "y": 0.0
-                    ],
-                    [
-                        "x": 1.0,
-                        "y": 0.0
-                    ],
-                    [
-                        "x": 1.0,
-                        "y": 1.0
-                    ],
-                    [
-                        "x": 0.0,
-                        "y": 1.0
-                    ],
-                ],
-                "center": [
-                    "x": 0.0,
-                    "y": 0.0
-                ],
-                "type": [
-                    "name": "Square",
-                    "id": "90-90-90-90"
-                ]
-            ]
-        ]
-    ]
-]
+//let exampleWorldFile: [String: Any] = [
+//    "world": [
+//        "name" : "testworld",
+//        "shapes": [
+//            [
+//                "vertices": [
+//                    [
+//                        "x": 0.0,
+//                        "y": 0.0
+//                    ],
+//                    [
+//                        "x": 1.0,
+//                        "y": 0.0
+//                    ],
+//                    [
+//                        "x": 1.0,
+//                        "y": 1.0
+//                    ],
+//                    [
+//                        "x": 0.0,
+//                        "y": 1.0
+//                    ],
+//                ],
+//                "center": [
+//                    "x": 0.0,
+//                    "y": 0.0
+//                ],
+//                "type": [
+//                    "name": "Square",
+//                    "id": "90-90-90-90"
+//                ]
+//            ]
+//        ]
+//    ]
+//]

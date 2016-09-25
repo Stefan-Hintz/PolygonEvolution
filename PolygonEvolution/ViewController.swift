@@ -10,17 +10,28 @@ let SIZE = 20.0
 
 class ViewController: NSViewController
 {
-    var world = World()
-	var simulationStarted = false
+	var world = World()
+	var simulationStarted = true
 	var shapeLayer = CAShapeLayer()
 
-    override func viewDidLoad()
+	var angles = [Angle]()
+
+	override func viewDidLoad()
 	{
 		super.viewDidLoad()
 
 		updateTransformation(animate: false)
 
 		addShape()
+
+		for _ in 0 ..< 5
+		{
+			let angle = Angle()
+
+			angle.divider = 18
+
+			angles.append(angle)
+		}
 	}
 
 	override func viewWillAppear()
@@ -30,10 +41,12 @@ class ViewController: NSViewController
 			document.viewController = self
 			show(model: document.world)
 		}
+
+		view.window?.acceptsMouseMovedEvents = true
 	}
 
 	override var representedObject: Any?
-	{
+		{
 		didSet
 		{
 			if let document = representedObject as? Document
@@ -53,9 +66,9 @@ class ViewController: NSViewController
 		let path = CGMutablePath()
 
 		path.move(to: CGPoint(x: 0, y: 0))
-		path.addLine(to: CGPoint(x: 20, y: 0))
-		path.addLine(to: CGPoint(x: 20, y: 20))
-		path.addLine(to: CGPoint(x: 0, y: 20))
+		path.addLine(to: CGPoint(x: SIZE, y: 0))
+		path.addLine(to: CGPoint(x: SIZE, y: SIZE))
+		path.addLine(to: CGPoint(x: 0, y: SIZE))
 		path.closeSubpath()
 
 		shapeLayer.path = path
@@ -91,7 +104,7 @@ class ViewController: NSViewController
 			}
 		}
 
-		path.closeSubpath()
+		//		path.closeSubpath()
 
 		shapeLayer.path = path
 
@@ -159,7 +172,42 @@ class ViewController: NSViewController
 	{
 		if simulationStarted
 		{
+			let path = CGMutablePath()
 
+			var x = 0.0
+			var y = 0.0
+
+			path.move(to: CGPoint(x: x, y: y))
+
+			var sumAngle = 0.0
+
+			for angle in angles
+			{
+				let a = angle.radians()
+				let b = π - a
+
+				x += SIZE * cos(b)
+				y += SIZE * sin(b)
+
+				path.addLine(to: CGPoint(x: x, y: y))
+
+				sumAngle += a
+			}
+
+			path.closeSubpath()
+
+			for angle in angles
+			{
+				angle.nominator += 1
+				if angle.nominator < angle.divider
+				{
+					break
+				}
+				
+				angle.nominator = 0
+			}
+			
+			shapeLayer.path = path
 		}
 	}
 }

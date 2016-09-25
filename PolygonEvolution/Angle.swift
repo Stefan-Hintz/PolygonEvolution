@@ -10,8 +10,8 @@ let π = Double.pi
 
 class Angle
 {
-	var nominator = 0
-	var divider = 0
+	var nominator = 1
+	var divider = 1
     var radian = 0.0
     
     func value() -> Double
@@ -29,7 +29,8 @@ class Angle
 		return value() * 2.0 * π
 	}
     
-    func setRadian(r: Double) {
+    func setRadian(r: Double)
+	{
         radian = r
     }
 }
