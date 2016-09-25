@@ -71,7 +71,7 @@ let Triangle: [String: Any] = [
     ]
 ]
 
-let decagon: [String: Any] = [
+let Decagon: [String: Any] = [
     "vertices": [
         [
             "x": 0.0,
@@ -125,7 +125,6 @@ let Pentagon: [String: Any] = [
 ]
 
 let Hexagon: [String: Any] = [
-    
     "vertices": [
         ["x": 0.0, "y": 0.0],
         ["x": 1.0, "y": 0.0],
@@ -338,8 +337,7 @@ let Honeycomb: [String: Any] = [
 ]
 
 
-
-
+var baseShapes = [Square, Triangle, Decagon, Pentagon, Hexagon, Bow_Tie, Rhombus, Octagon, Barrel, Butterfly, Butterfly, Diamond, Star, Honeycomb  ]
 
 
 
