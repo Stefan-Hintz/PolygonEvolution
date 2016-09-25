@@ -7,6 +7,7 @@
 import Cocoa
 
 let π = Double.pi
+let ε = 0.001953125
 
 class Angle
 {

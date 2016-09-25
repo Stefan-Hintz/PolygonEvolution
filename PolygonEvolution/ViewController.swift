@@ -15,6 +15,7 @@ class ViewController: NSViewController
 	var shapeLayer = CAShapeLayer()
 
 	var angles = [Angle]()
+	var sum = 0
 
 	override func viewDidLoad()
 	{
@@ -28,10 +29,12 @@ class ViewController: NSViewController
 		{
 			let angle = Angle()
 
-			angle.divider = 18
+			angle.divider = 20
 
 			angles.append(angle)
 		}
+
+		sum = (5 - 2) * 20
 	}
 
 	override func viewWillAppear()
@@ -123,7 +126,8 @@ class ViewController: NSViewController
 
 	func updateTransformation(animate: Bool)
 	{
-		view.layer?.sublayerTransform = CATransform3DMakeTranslation(view.bounds.size.width * 0.5, view.bounds.size.height * 0.5, 0.0)
+		view.layer?.sublayerTransform = CATransform3DScale(CATransform3DMakeTranslation(view.bounds.size.width * 0.5, view.bounds.size.height * 0.5, 0.0)
+, 10.0, 10.0, 1.0)
 	}
 
 	override func mouseDown(with event: NSEvent)
@@ -157,6 +161,9 @@ class ViewController: NSViewController
 			case 32:
 				toggleSimulation()
 
+			case NSRightArrowFunctionKey:
+				simulate()
+
 			default:
 				super.keyDown(with: event)
 			}
@@ -172,6 +179,14 @@ class ViewController: NSViewController
 	{
 		if simulationStarted
 		{
+			simulate()
+		}
+	}
+
+	func simulate()
+	{
+		while true
+		{
 			let path = CGMutablePath()
 
 			var x = 0.0
@@ -180,34 +195,56 @@ class ViewController: NSViewController
 			path.move(to: CGPoint(x: x, y: y))
 
 			var sumAngle = 0.0
+			var s = 0
 
 			for angle in angles
 			{
 				let a = angle.radians()
 				let b = π - a
 
-				x += SIZE * cos(b)
-				y += SIZE * sin(b)
-
 				path.addLine(to: CGPoint(x: x, y: y))
 
-				sumAngle += a
-			}
+				x += SIZE * cos(sumAngle)
+				y += SIZE * sin(sumAngle)
 
-			path.closeSubpath()
+				sumAngle += b
+				s += 20 - angle.nominator
+			}
 
 			for angle in angles
 			{
 				angle.nominator += 1
-				if angle.nominator < angle.divider
+
+				if 2 * angle.nominator < angle.divider
 				{
 					break
 				}
-				
-				angle.nominator = 0
+
+				angle.nominator = 1
 			}
-			
+
+//			if s != sum
+//			{
+//				print("sum: \(s) \(sum)")
+//
+//				continue
+//			}
+
+			if x * x + y * y > ε
+			{
+//				print("\(x) \(y)")
+
+				continue
+			}
+
+			print("sum: \(s) \(sum)")
+
+
+			path.closeSubpath()
+
 			shapeLayer.path = path
+			
+			break
 		}
 	}
 }
