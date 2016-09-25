@@ -195,6 +195,10 @@ class Shape
             vertices.append(v1)
         }
         
+        let v2 = Vector2()
+        v2.fromJSON(object: object["world_center"] as! [String : Any])
+        worldCenter = v2
+        
         type.fromJSON(object: object["type"] as! [String: Any])
     }
     
@@ -210,7 +214,9 @@ class Shape
     
         object["vertices"] = verticDict
         object["center"] = center.toJSON()
+        object["world_center"] = worldCenter.toJSON()
         object["type"] = type.toJSON()
+        
         
         return object
     }
@@ -307,7 +313,7 @@ class World
 
         generation = generation + 1
         var eVecs = [Vector2]()
-        var eShapes = [Shape]()
+        let eShapes = [Shape]()
 
         for shape in shapes
         {
@@ -363,6 +369,7 @@ class World
 					let s1 = Shape()
 					s1.fromJSON(object: s)
 					shapes.append(s1)
+                    addShape(shape: s1, center: s1.worldCenter)
 				}
 			}
 		}
