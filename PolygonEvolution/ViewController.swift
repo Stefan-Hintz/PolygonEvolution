@@ -11,12 +11,16 @@ let SIZE = 20.0
 class ViewController: NSViewController
 {
     var world = World()
+	var simulationStarted = false
+	var shapeLayer = CAShapeLayer()
 
     override func viewDidLoad()
 	{
 		super.viewDidLoad()
 
 		updateTransformation(animate: false)
+
+		addShape()
 	}
 
 	override func viewWillAppear()
@@ -41,9 +45,7 @@ class ViewController: NSViewController
 
 	func addShape()
 	{
-		let shapeLayer = CAShapeLayer()
-
-		shapeLayer.fillColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1).cgColor
+		shapeLayer.fillColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1).cgColor
 		shapeLayer.strokeColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).cgColor
 		shapeLayer.lineWidth = 2.0
 		shapeLayer.lineJoin = kCALineJoinRound
@@ -130,6 +132,35 @@ class ViewController: NSViewController
 	func birth()
 	{
 
+	}
+
+	override func keyDown(with event: NSEvent)
+	{
+		if let value = event.characters?.unicodeScalars.first?.value
+		{
+			switch Int(value)
+			{
+			// Space
+			case 32:
+				toggleSimulation()
+
+			default:
+				super.keyDown(with: event)
+			}
+		}
+	}
+
+	func toggleSimulation()
+	{
+		simulationStarted = !simulationStarted
+	}
+
+	override func mouseMoved(with event: NSEvent)
+	{
+		if simulationStarted
+		{
+
+		}
 	}
 }
 

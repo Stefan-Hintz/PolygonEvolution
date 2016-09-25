@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import JSONCodable
 
 typealias Scalar = Double
 
@@ -28,6 +27,7 @@ class Vector2
         {
             self.x = x
         }
+
         if let y = object["y"] as? Scalar
         {
             self.y = y
@@ -37,6 +37,7 @@ class Vector2
     func toJSON() -> [String: Any]
     {
         var object = [String: Any]()
+
         object["x"] = x
         object["y"] = y
         
@@ -47,7 +48,6 @@ class Vector2
 
 class Edge
 {
-    
     var start = Vector2()
     var end = Vector2()
 
@@ -73,10 +73,7 @@ class Edge
         
         return object
     }
-
-
 }
-
 
 class ShapeType
 {
@@ -106,12 +103,9 @@ class Shape
     var vertices = [Vector2]()
     var center = Vector2()
     var type = ShapeType()
-    
-    
-    
+
     func fromJSON(object: [String: Any])
     {
-    
         let dictArray = object["vertices"] as! [[String : Any]]
         vertices = [Vector2]()
 
@@ -128,11 +122,10 @@ class Shape
     func toJSON() -> [String: Any]
     {
         var object = [String: Any]()
-        
-        
         var verticDict = [[String: Any]]()
         
-        for v in vertices {
+        for v in vertices
+		{
             verticDict.append(v.toJSON())
         }
     
@@ -143,16 +136,14 @@ class Shape
         return object
     }
 
-    
     func calcAngles()
     {
-        
         let count = vertices.count
         let countLess = count - 1
         
         var angleCollection = [Angle]()
         
-        for variant in 0..<count
+        for index in 0..<count
         {
         
         /*
@@ -164,9 +155,9 @@ class Shape
            1|_______|2
              
         */
-            let vertex0 = vertices[(variant + (countLess)) % vertices.count]
-            let vertex1 = vertices[variant]
-            let vertex2 = vertices[(variant + 1) % vertices.count]
+            let vertex0 = vertices[(index + countLess) % count]
+            let vertex1 = vertices[index]
+            let vertex2 = vertices[(index + 1) % count]
         
             let v0x = vertex0.x - vertex1.x
             let v0y = vertex0.y - vertex1.y
@@ -183,12 +174,12 @@ class Shape
             a.setRadian(r: angle)
             angleCollection.append(a)
         }
+
         angles = angleCollection
     }
     
     func calcEdges()
     {
-        
         let count = vertices.count
         
         for i in 0..<count-1  {
@@ -204,7 +195,6 @@ class Shape
     
     func calcCenter()
     {
-        
         var x = 0.0
         var y = 0.0
         
@@ -225,20 +215,22 @@ class World
     var shapes = [Shape]()
     
     func fromJSON(object: [String: Any])
-    {
-        var worldObject = object["world"] as! [String: Any]
-        
-        let dictArray = worldObject["shapes"] as! [[String : Any]]
-        shapes = [Shape]()
-        
-        for s in dictArray
-        {
-            let s1 = Shape()
-            s1.fromJSON(object: s)
-            shapes.append(s1)
-        }
-    }
+	{
+		if let worldObject = object["world"] as? [String: Any]
+		{
+			if let array = worldObject["shapes"] as? [[String : Any]]
+			{
+				shapes = [Shape]()
 
+				for s in array
+				{
+					let s1 = Shape()
+					s1.fromJSON(object: s)
+					shapes.append(s1)
+				}
+			}
+		}
+	}
 
     func toJSON() -> [String: Any]
     {
@@ -295,8 +287,3 @@ let exampleWorldFile: [String: Any] = [
         ]
     ]
 ]
-
-
-
-
-
