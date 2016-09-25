@@ -96,7 +96,6 @@ class Edge: Hashable
             worldEnd.scale(s: SIZE)
             worldEnd.add(v: center)
             worldEnd.sub(v: shape.center)
-            return self.worldEnd
     }
     
     func setEdge(start: Vector2, end: Vector2, shape: Shape)
