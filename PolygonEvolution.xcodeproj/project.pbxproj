@@ -7,10 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CE2D72421D96D49B00329C25 /* JSONCodable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE2D72411D96D49B00329C25 /* JSONCodable.framework */; };
-		CE2D72431D96D49E00329C25 /* JSONCodable.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE2D72411D96D49B00329C25 /* JSONCodable.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		CE5BFB9A1D96C6F700217608 /* JSONJoy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5BFB991D96C6F700217608 /* JSONJoy.framework */; };
-		CE5BFB9B1D96C7D900217608 /* JSONJoy.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE5BFB991D96C6F700217608 /* JSONJoy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CEE343A31D96B8F500F8ACEA /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE343A21D96B8F500F8ACEA /* World.swift */; };
 		F84CB73B1D9694B60019EE83 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84CB73A1D9694B60019EE83 /* View.swift */; };
 		F84CB73D1D96A0670019EE83 /* Angle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84CB73C1D96A0670019EE83 /* Angle.swift */; };
@@ -29,16 +25,12 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				CE2D72431D96D49E00329C25 /* JSONCodable.framework in CopyFiles */,
-				CE5BFB9B1D96C7D900217608 /* JSONJoy.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		CE2D72411D96D49B00329C25 /* JSONCodable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = JSONCodable.framework; sourceTree = "<group>"; };
-		CE5BFB991D96C6F700217608 /* JSONJoy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = JSONJoy.framework; sourceTree = "<group>"; };
 		CEE343A21D96B8F500F8ACEA /* World.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = World.swift; path = Models/World.swift; sourceTree = "<group>"; };
 		F84CB73A1D9694B60019EE83 /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		F84CB73C1D96A0670019EE83 /* Angle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Angle.swift; sourceTree = "<group>"; };
@@ -57,8 +49,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE5BFB9A1D96C6F700217608 /* JSONJoy.framework in Frameworks */,
-				CE2D72421D96D49B00329C25 /* JSONCodable.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,19 +72,9 @@
 			name = View;
 			sourceTree = "<group>";
 		};
-		F85227AC1D96CBA900E54BC5 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				CE2D72411D96D49B00329C25 /* JSONCodable.framework */,
-				CE5BFB991D96C6F700217608 /* JSONJoy.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		F8D511441D96753200F74937 = {
 			isa = PBXGroup;
 			children = (
-				F85227AC1D96CBA900E54BC5 /* Frameworks */,
 				F8D5114F1D96753200F74937 /* PolygonEvolution */,
 				F8D5114E1D96753200F74937 /* Products */,
 			);
@@ -267,6 +247,7 @@
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -308,6 +289,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -319,7 +301,6 @@
 				DEVELOPMENT_TEAM = LP79SBZ8M8;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Frameworks",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = PolygonEvolution/Info.plist;
@@ -327,7 +308,6 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = es.rockt.hintz.PolygonEvolution;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -339,7 +319,6 @@
 				DEVELOPMENT_TEAM = LP79SBZ8M8;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Frameworks",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = PolygonEvolution/Info.plist;
@@ -347,7 +326,6 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = es.rockt.hintz.PolygonEvolution;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
