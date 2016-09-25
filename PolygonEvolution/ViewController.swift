@@ -16,6 +16,9 @@ class ViewController: NSViewController
 
 	var angles = [Angle]()
 	var sum = 0
+	var divider = 60
+
+	var edgeCount = 5
 
 	override func viewDidLoad()
 	{
@@ -25,16 +28,21 @@ class ViewController: NSViewController
 
 		addShape()
 
-		for _ in 0 ..< 5
+		updateAngles()
+	}
+
+	func updateAngles()
+	{
+		for _ in 0 ..< edgeCount
 		{
 			let angle = Angle()
 
-			angle.divider = 20
+			angle.divider = divider
 
 			angles.append(angle)
 		}
 
-		sum = (5 - 2) * 20
+		sum = (edgeCount - 2) * divider
 	}
 
 	override func viewWillAppear()
@@ -61,7 +69,7 @@ class ViewController: NSViewController
 
 	func addShape()
 	{
-		shapeLayer.fillColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1).cgColor
+		shapeLayer.fillColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 0.5).cgColor
 		shapeLayer.strokeColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).cgColor
 		shapeLayer.lineWidth = 2.0
 		shapeLayer.lineJoin = kCALineJoinRound
@@ -83,7 +91,7 @@ class ViewController: NSViewController
 	{
 		let shapeLayer = CAShapeLayer()
 
-		shapeLayer.fillColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1).cgColor
+		shapeLayer.fillColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 0.5).cgColor
 		shapeLayer.strokeColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).cgColor
 		shapeLayer.lineWidth = 2.0
 		shapeLayer.lineJoin = kCALineJoinRound
@@ -107,7 +115,7 @@ class ViewController: NSViewController
 			}
 		}
 
-		//		path.closeSubpath()
+		path.closeSubpath()
 
 		shapeLayer.path = path
 
@@ -164,6 +172,17 @@ class ViewController: NSViewController
 			case NSRightArrowFunctionKey:
 				simulate()
 
+			case NSUpArrowFunctionKey:
+				edgeCount += 1
+				updateAngles()
+				
+			case NSDownArrowFunctionKey:
+				if edgeCount > 3
+				{
+					edgeCount -= 1
+					updateAngles()
+				}
+
 			default:
 				super.keyDown(with: event)
 			}
@@ -202,13 +221,15 @@ class ViewController: NSViewController
 				let a = angle.radians()
 				let b = π - a
 
-				path.addLine(to: CGPoint(x: x, y: y))
-
 				x += SIZE * cos(sumAngle)
 				y += SIZE * sin(sumAngle)
 
+				path.addLine(to: CGPoint(x: x, y: y))
+
 				sumAngle += b
-				s += 20 - angle.nominator
+				s += angle.nominator
+
+//				print(angle.nominator)
 			}
 
 			for angle in angles
@@ -238,7 +259,6 @@ class ViewController: NSViewController
 			}
 
 			print("sum: \(s) \(sum)")
-
 
 			path.closeSubpath()
 
