@@ -10,36 +10,104 @@ import Foundation
 
 typealias Scalar = Double
 
-class Vector2: Hashable
+struct Center
 {
     var x = 0.0
     var y = 0.0
     
-    func setVector(x: Double, y: Double)
+    
+    mutating func set(x: Double, y: Double)
     {
         self.x = x
         self.y = y
     }
     
-    func add(v: Vector2)
+    mutating func fromJSON(object: [String: Any])
     {
-        x = x + v.x
-        y = y + v.y
+        if let x = object["x"] as? Scalar
+        {
+            self.x = x
+        }
+        
+        if let y = object["y"] as? Scalar
+        {
+            self.y = y
+        }
     }
     
-    func sub(v: Vector2)
+    func toJSON() -> [String: Any]
     {
-        x = x - v.x
-        y = y - v.y
+        var object = [String: Any]()
+        
+        object["x"] = x
+        object["y"] = y
+        
+        return object
+    }
+}
+
+class Vector2: Hashable
+{
+    // keep reference to shape
+    var shape = Shape()
+    var x = 0.0
+    var y = 0.0
+    
+    
+    var worldX: Scalar
+        {
+        get
+        {
+            return x + shape.worldCenter.x
+        }
     }
     
-    func scale(s: Double)
-    {
-        x = x*s
-        y = y*s
+    var worldY: Scalar
+        {
+        get
+        {
+            return y + shape.worldCenter.y
+        }
     }
     
-    func fromJSON(object: [String: Any])
+    func set(x: Double, y: Double, shape: Shape)
+    {
+        self.x = x
+        self.y = y
+        self.shape = shape
+    }
+    
+    func set(x: Double, y: Double)
+    {
+        self.x = x
+        self.y = y
+    }
+    
+    func add(vector2: Vector2)
+    {
+        x = x + vector2.x
+        y = y + vector2.y
+    }
+    
+    func add(center: Center)
+    {
+        x = x + center.x
+        y = x + center.y
+    }
+    
+    func sub(vector2: Vector2)
+    {
+        x = x - vector2.x
+        y = y - vector2.y
+    }
+    
+    func scale(scale: Double)
+    {
+        x = x*scale
+        y = y*scale
+    }
+    
+    func fromJSON(object: [String: Any], shape: Shape)
     {
         if let x = object["x"] as? Scalar
         {
@@ -50,6 +118,8 @@ class Vector2: Hashable
         {
             self.y = y
         }
+        
+        self.shape = shape
     }
     
     func toJSON() -> [String: Any]
@@ -65,75 +135,58 @@ class Vector2: Hashable
     // make class Hashable
     var hashValue: Int
         {
-        get {
-            return (self.x + self.y).hashValue
+        get
+        {
+            // generate a unique id of worldX-worldY
+            //
+            // TODO: make this safe for rounding error by defining a treshold distance for vertice merging
+            var unique = 0.0
+            unique += worldX * 1000000000000
+            unique += worldY * 1000000000
+            
+            return Int(unique)
         }
     }
     
     // make class Equatable
-    public static func ==(lhs: Vector2, rhs: Vector2) -> Bool {
-        return lhs.x == rhs.x && lhs.y == rhs.y
+    public static func ==(lhs: Vector2, rhs: Vector2) -> Bool
+    {
+        return lhs.hashValue == rhs.hashValue
     }
 }
 
 class Edge: Hashable
 {
-    var shape = Shape()
     var start = Vector2()
     var end = Vector2()
 
-    var worldStart = Vector2()
-    var worldEnd = Vector2()
-    
-    
-    func setWorldCoords(center: Vector2)
+    func set(start: Vector2, end: Vector2)
     {
-    
-            worldStart.scale(s: SIZE)
-            worldStart.add(v: center)
-            worldStart.sub(v: shape.center)
-    
-            worldEnd.scale(s: SIZE)
-            worldEnd.add(v: center)
-            worldEnd.sub(v: shape.center)
-    }
-    
-    func setEdge(start: Vector2, end: Vector2, shape: Shape)
-    {
-        
-        self.shape = shape
         self.start = start
         self.end = end
-    }
-    
-    func fromJSON(object: [String: Any])
-    {
-        start.fromJSON(object: object["start"] as! [String : Any])
-        end.fromJSON(object: object["end"] as! [String : Any])
-    }
-    
-    func toJSON() -> [String: Any]
-	{
-        var object = [String: Any]()
-        
-        object["start"] = start.toJSON()
-        object["end"] = end.toJSON()
-        
-        return object
     }
     
     // make class Hashable
     var hashValue: Int
         {
         get {
-            return ((self.worldStart.x + self.worldEnd.x)*(self.worldStart.y + self.worldEnd.y)).hashValue
+            // generate a unique id of worldStart.x-worldStart.y-worldEnd.x-worldEnd.y
+            //
+            // TODO: make this safe for rounding error by defining a treshold distance for vertice merging
+            var unique = 0.0
+            unique += start.worldX * 1000000000000
+            unique += start.worldY * 1000000000
+            unique += end.worldX * 1000000
+            unique += end.worldY * 1000
+            
+            return Int(unique)
         }
     }
     
     // make class Equatable
     public static func ==(lhs: Edge, rhs: Edge) -> Bool
     {
-        return (lhs.start.x == rhs.start.x && lhs.end.x == rhs.end.x) && (lhs.start.y == rhs.start.y && lhs.end.y == rhs.end.y)
+        return lhs.hashValue == rhs.hashValue
     }
 }
 
@@ -163,26 +216,11 @@ class Shape
     var angles = [Angle]()
     var edges = [Edge]()
     var vertices = [Vector2]()
-    var center = Vector2()
+    var center = Center()
+    var worldCenter = Center()
     var type = ShapeType()
     
-    var worldCenter: Vector2
-    {
-        set(center)
-        {
-            self.worldCenter = center
-            for edge in edges
-            {
-                edge.setWorldCoords(center: center)
-            }
-            
-        }
-        get
-        {
-            return self.worldCenter
-        }
-    }
-
+    
     func fromJSON(object: [String: Any])
     {
         let dictArray = object["vertices"] as! [[String : Any]]
@@ -191,13 +229,13 @@ class Shape
         for v in dictArray
         {
             let v1 = Vector2()
-            v1.fromJSON(object: v)
+            v1.fromJSON(object: v, shape: self)
             vertices.append(v1)
         }
         
-        let v2 = Vector2()
-        v2.fromJSON(object: object["world_center"] as! [String : Any])
-        worldCenter = v2
+        var c = Center()
+        c.fromJSON(object: object["world_center"] as! [String : Any])
+        worldCenter = c
         
         type.fromJSON(object: object["type"] as! [String: Any])
     }
@@ -205,14 +243,14 @@ class Shape
     func toJSON() -> [String: Any]
     {
         var object = [String: Any]()
-        var verticDict = [[String: Any]]()
+        var vertexDict = [[String: Any]]()
         
         for v in vertices
 		{
-            verticDict.append(v.toJSON())
+            vertexDict.append(v.toJSON())
         }
     
-        object["vertices"] = verticDict
+        object["vertices"] = vertexDict
         object["center"] = center.toJSON()
         object["world_center"] = worldCenter.toJSON()
         object["type"] = type.toJSON()
@@ -269,12 +307,12 @@ class Shape
         
         for i in 0..<count-1  {
             let e = Edge()
-            e.setEdge(start: vertices[i], end: vertices[i+1], shape: self)
+            e.set(start: vertices[i], end: vertices[i+1])
             edges.append(e)
         }
         
         let e = Edge()
-        e.setEdge(start: vertices[count-1], end: vertices[0], shape: self)
+        e.set(start: vertices[count-1], end: vertices[0])
         edges.append(e)
     }
     
@@ -290,7 +328,13 @@ class Shape
         }
         
         let count = Double(vertices.count)
-        center.setVector(x: x/count, y: y/count)
+        center.set(x: x/count, y: y/count)
+    }
+    
+    func calc() {
+        calcAngles()
+        calcEdges()
+        calcCenter()
     }
 }
 
@@ -321,8 +365,15 @@ class World
             {
                 if (edgeNeighbours[edge]?.count)! < 2
                 {
-                    eVecs.append(edge.worldStart)
-                    eVecs.append(edge.worldEnd)
+                    
+                    if !eVecs.contains(edge.start)
+                    {
+                    eVecs.append(edge.start)
+                    }
+                    if !eVecs.contains(edge.end)
+                    {
+                    eVecs.append(edge.end)
+                    }
                 }
             }
         }
@@ -331,8 +382,9 @@ class World
         
     }
     
-    func addShape(shape: Shape, center: Vector2)
+    func addShape(shape: Shape, center: Center)
     {
+        shape.calc()
         shape.worldCenter = center
         shapes.append(shape)
         addEdgeNeighbours(s: shape)
@@ -344,7 +396,15 @@ class World
     {
         for e in s.edges
         {
-            edgeNeighbours[e]?.append(s)
+            
+            // swift quirks, how to append to an unitilized array
+            if var arr = edgeNeighbours[e]
+            {
+                arr.append(s)
+            }else
+            {
+                edgeNeighbours[e] = [s]
+            }
         }
     }
     
@@ -368,8 +428,8 @@ class World
 				{
 					let s1 = Shape()
 					s1.fromJSON(object: s)
-					shapes.append(s1)
                     addShape(shape: s1, center: s1.worldCenter)
+                    
 				}
 			}
 		}
@@ -394,39 +454,3 @@ class World
         return worldObject
     }
 }
-
-//let exampleWorldFile: [String: Any] = [
-//    "world": [
-//        "name" : "testworld",
-//        "shapes": [
-//            [
-//                "vertices": [
-//                    [
-//                        "x": 0.0,
-//                        "y": 0.0
-//                    ],
-//                    [
-//                        "x": 1.0,
-//                        "y": 0.0
-//                    ],
-//                    [
-//                        "x": 1.0,
-//                        "y": 1.0
-//                    ],
-//                    [
-//                        "x": 0.0,
-//                        "y": 1.0
-//                    ],
-//                ],
-//                "center": [
-//                    "x": 0.0,
-//                    "y": 0.0
-//                ],
-//                "type": [
-//                    "name": "Square",
-//                    "id": "90-90-90-90"
-//                ]
-//            ]
-//        ]
-//    ]
-//]

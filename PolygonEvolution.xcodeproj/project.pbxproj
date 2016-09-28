@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE47FCEC1D9B2D2600B3665D /* rand.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE47FCEB1D9B2D2600B3665D /* rand.swift */; };
 		CED05A5C1D97DF0B006D8325 /* BaseShapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED05A5B1D97DF0B006D8325 /* BaseShapes.swift */; };
 		CEE343A31D96B8F500F8ACEA /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE343A21D96B8F500F8ACEA /* World.swift */; };
 		F84CB73B1D9694B60019EE83 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84CB73A1D9694B60019EE83 /* View.swift */; };
@@ -32,6 +33,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CE47FCEB1D9B2D2600B3665D /* rand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = rand.swift; sourceTree = "<group>"; };
 		CED05A5B1D97DF0B006D8325 /* BaseShapes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseShapes.swift; sourceTree = "<group>"; };
 		CEE343A21D96B8F500F8ACEA /* World.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = World.swift; path = Models/World.swift; sourceTree = "<group>"; };
 		F84CB73A1D9694B60019EE83 /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				F8D511581D96753200F74937 /* Main.storyboard */,
 				F8D5115B1D96753200F74937 /* Info.plist */,
 				CEE343A41D96B90600F8ACEA /* Models */,
+				CE47FCEB1D9B2D2600B3665D /* rand.swift */,
 			);
 			path = PolygonEvolution;
 			sourceTree = "<group>";
@@ -183,6 +186,7 @@
 			files = (
 				CEE343A31D96B8F500F8ACEA /* World.swift in Sources */,
 				CED05A5C1D97DF0B006D8325 /* BaseShapes.swift in Sources */,
+				CE47FCEC1D9B2D2600B3665D /* rand.swift in Sources */,
 				F84CB73B1D9694B60019EE83 /* View.swift in Sources */,
 				F84CB73D1D96A0670019EE83 /* Angle.swift in Sources */,
 				F8D511531D96753200F74937 /* ViewController.swift in Sources */,

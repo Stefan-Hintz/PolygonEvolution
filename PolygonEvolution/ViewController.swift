@@ -157,6 +157,9 @@ class ViewController: NSViewController
 		{
 			switch Int(value)
 			{
+            // e
+            case 101:
+                evolve()
 			// Space
 			case 32:
 				toggleSimulation()
@@ -179,13 +182,107 @@ class ViewController: NSViewController
 	{
 		if simulationStarted
 		{
-			simulate()
+			//simulate()
 		}
 	}
+    
+    
+    // crate random poligons with a symetric angle distribution
+    func angleDistrubution(maxSides: Int) -> [Double]
+    {
+        
+        
+        let gones = Int.random(lower: 3, upper: maxSides) // number of sides
+        
+        let fullAngle = π * Double(gones - 2) // sum of interior angles
+        
+        let halfAngle = fullAngle / 2
+        
+        var angles = [Double]()
+        
+        if (gones % 2 == 0) // even
+        {
+            let divs = gones/2
+        
+            var divAngleSize = halfAngle
+            
+            for div in 0..<divs-1
+            {
+                angles.append(Double.random(lower: 0,upper: divAngleSize))
+                divAngleSize -= angles[div]
+            }
+            angles.append(divAngleSize)
+            
+            // mirror angles
+            var count = 1
+            for _ in divs..<gones
+            {
+                angles.append(angles[divs-count])
+                count += 1
+            }
+            
+        }
+        else // odd
+        {
+            
+            let divs = (gones-1)/2
+            
+            var divAngleSize = halfAngle
+            
+            for div in 0..<divs
+            {
+                if divs < 2 {
+                    angles.append(Double.random(lower: 0,upper: divAngleSize * 1.3)) // keeps trianges from getting to pointie
+                }
+                else {
+                    angles.append(Double.random(lower: 0,upper: divAngleSize))
+                }
+                divAngleSize -= angles[div]
+                print(angles)
+            }
+            angles.append(divAngleSize*2)
+            
+            // mirror angles
+            var count = 1
+            for _ in divs..<gones-1
+            {
+                angles.append(angles[divs-count])
+                count += 1
+            }
+        }
+        
+        
+        var testAngle = 0.0
+        
+        for angle in angles
+        {
+            testAngle += angle
+        }
+        
+        print("FullAngle", fullAngle)
+        print("TestAngle", testAngle)
+        
+        return angles
+        
+    }
+    
+    func evolve()
+    {
+        
+        let (nextPoints, nextShapes) = world.evolve()
+    
+        let angles = angleDistrubution(maxSides: 42)
+        
+        print(angles)
+        
+       
+    }
+    
+    
 
 	func simulate()
 	{
-		while true
+        while true
 		{
 			let path = CGMutablePath()
 
@@ -237,7 +334,7 @@ class ViewController: NSViewController
 				continue
 			}
 
-			print("sum: \(s) \(sum)")
+			//print("sum: \(s) \(sum)")
 
 
 			path.closeSubpath()
@@ -248,4 +345,3 @@ class ViewController: NSViewController
 		}
 	}
 }
-
